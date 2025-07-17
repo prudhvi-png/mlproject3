@@ -1,5 +1,5 @@
 import os
-from exception import CustomException
+from src.exception import CustomException
 from datetime import datetime
 import logging
 import sys

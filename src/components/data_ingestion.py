@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from src.logger import logging
 import pandas as pd
 from src.exception import CustomException
+from data_transformation import DataTransform
 
 
 
@@ -39,6 +40,11 @@ class DataIngestion:
             test_set.to_csv(self.data_ingestion_config.test_data_file_path,index=False,header=True)
 
             logging.info("Sucessfully completed the Data set Ingestion !!!!")
+
+            return (
+                self.data_ingestion_config.train_data_file_path,
+                self.data_ingestion_config.test_data_file_path
+            )
         
         except Exception as e:
             raise CustomException(e,sys)
@@ -47,7 +53,10 @@ class DataIngestion:
 if __name__ == "__main__":
     data_ingestion_obj = DataIngestion()
 
-    data_ingestion_obj.initiate_data_ingestion()
+    train_df,test_df = data_ingestion_obj.initiate_data_ingestion()
+    
+    data_transform_obj = DataTransform()
+    data_transform_obj.get_data_transform_obj(train_df=train_df,test_df=test_df)
     
 
 

@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 import sys
-from exception import CustomException
+from src.exception import CustomException
 
 
 def install_requirements(file_path):
